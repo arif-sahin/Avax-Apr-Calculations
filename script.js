@@ -45,5 +45,5 @@ function calculate() {
     
     const netReward = grossReward - feeAmount;
 
-    document.getElementById("estimatedReward").textContent = netReward;
+    document.getElementById("estimatedReward").textContent =netReward;
 }

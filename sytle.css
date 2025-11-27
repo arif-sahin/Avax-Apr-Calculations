@@ -5,6 +5,7 @@ body {
 
 h1 {
     text-align: center;
+    color: #e84142;
 }
 
 
@@ -15,11 +16,15 @@ h1 {
     border: 2px solid #e0e0e0;
     border-radius: 15px;
     justify-self: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
+
 .form {
-    margin: 10px;
-    padding: 5px;
+    margin: 15px;
+    padding: 10px;
+    background-color: #fff9f9;
     border: 1px solid #ffecec;
+    border-radius: 8px;
 
 }
 
@@ -35,20 +40,37 @@ input {
 label {
     font-weight: bold;
     display: block;
+    margin-bottom: 8px;
+    color: #333;
 }
 
 .btn-calc {
     color: white;
     background-color: #e84142;
     border: none;
+    border-radius: 8px;
     width: 100%;
-    padding: 10px;
+    padding: 15px;
     margin-top: 10px;
     font-size: 18px;
     font-weight: bold;
 }
 
 .result-card {
-    margin-top: 20px;
+    margin-top: 25px;
     text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    border-radius: 10px;
+}
+
+.small-note {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
+
+#estimatedReward {
+    color: white;
 }
