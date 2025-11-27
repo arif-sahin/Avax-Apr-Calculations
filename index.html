@@ -19,21 +19,22 @@
             <h2>Stake Amount&Time</h2>
             <div class="form">
                 <label>Stake Amount</label>
-                <input type="number">
+                <input type="number" id="myStake" min="25">
+                <span>Min 25 Avax</span>
             </div>
             <div class="form">
                 <label>Staking Duration</label>
-                <input type="number" min="14" max="365">
-                <span>Min 14 Days</span>
-                <span>Max 1 Year</span>
+                <input type="number" id="myDays" min="14" max="365">
+                <span>Min 14 Days - Max 1 Year</span>
+                
             </div>
-            <button type="button">Calculate</button>
+            <button class="btn-calc" type="button" onclick="calculate()">Calculate</button>
         </div>
 
         <!--Result-->
         <div class="result-card">
             <h2>Estimated Rewards</h2>
-            <label id="dailyReward">..</label>
+            <label id="estimatedReward">0.00</label>
         </div>
 
         
