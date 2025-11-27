@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avax Apr</title>
+    <link rel="stylesheet" href="./sytle.css">
+</head>
+<body>
+    <!---Header-->
+    <header>
+        <h1>Avax Apr Calculations</h1>
+    </header>
+
+    <!---main-->
+    <main class="container">
+        <!--Inputs-->
+        <div class="stake-card">
+            <h2>Stake Amount&Time</h2>
+            <div class="form">
+                <label>Stake Amount</label>
+                <input type="number">
+            </div>
+            <div class="form">
+                <label>Staking Duration</label>
+                <input type="number" min="14" max="365">
+                <span>Min 14 Days</span>
+                <span>Max 1 Year</span>
+            </div>
+            <button type="button">Calculate</button>
+        </div>
+
+        <!--Result-->
+        <div class="result-card">
+            <h2>Estimated Rewards</h2>
+            <label id="dailyReward">..</label>
+        </div>
+
+        
+        <script src="./script.js"></script>
+    </main>
+
+</body>
+</html>
