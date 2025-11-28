@@ -7,6 +7,7 @@ const Params = {
     MinConsumptionRate: 0.10,
     MaxConsumptionRate: 0.12,
     VALIDATOR_FEE: 0.02,
+    MIN_STAKE: 25,
 };
 
 function getStakeAmount() {
@@ -36,6 +37,12 @@ function calculate() {
     //Rate Calculation, Longer duration = Higher rate
     const percentofMaxTime = getDuration() / 365;
     const myRate = Params.MinConsumptionRate + ((Params.MaxConsumptionRate - Params.MinConsumptionRate) * percentofMaxTime); 
+
+    // Input control
+    if(getStakeAmount() < Params.MIN_STAKE) {
+        alert("Stake amount must be at least 25 AVAX");
+        return; // stop the function
+    } 
 
     // Gross Reward
     const grossReward = remainingSupply * myShare * timeFactor * myRate;
