@@ -1,1 +1,1 @@
-![Screenshot](./img/screenshot.png)
+![Visit the site](https://avax-apr-calculations.vercel.app/)
