@@ -7,39 +7,61 @@
     <link rel="stylesheet" href="./sytle.css">
 </head>
 <body>
-    <!---Header-->
-    <header>
-        <h1>Avax Apr Calculations</h1>
-    </header>
-
     <!---main-->
     <main class="container">
+        <h1>Avax Apr Calculations</h1>
+        
+        <!-- Fetching Data -->
+        <div id="loading">
+            <div class="spinner"></div>
+            <div id="loadingText">Fetching Current Supply...</div>
+        </div>
+
+        <!--Role-->
+        <div class="role-select">
+            <button class="roleBtn active" onclick="setRole('delegator')">Delegator</button>
+            <button class="roleBtn" onclick="setRole('validator')">Validator</button>
+        </div>
+
         <!--Inputs-->
         <div class="stake-card">
-            <h2>Stake Amount&Time</h2>
-            <div class="form">
+            <!-- <h2>Stake Amount (AVAX)</h2> -->
+            <div class="form-group">
                 <label>Stake Amount</label>
-                <input type="number" id="myStake" min="25">
-                <div class="small-note">Minimium 25 AVAX required</div>
+                <input type="number" id="myStake" min="25" value="25">
+                <div class="small-note" id="minStake">Minimium 25 AVAX required</div>
             </div>
-            <div class="form">
-                <label>Staking Duration</label>
-                <input type="number" id="myDays" min="14" max="365">
+
+            <div class="form-group" id="feeSection">
+                <label>Fee Selection</label>
+                <input type="number" id="feeAmount" min="2" max="100" value="2">
+                <div class="small-note">Minimum fee is 2%</div>
+            </div>
+
+            <div class="form-group">
+                <label>Duration (Days)</label>
+                <input type="number" id="myDays" min="14" max="365" value="14" oninput="updateDayLabel()">
                 <div class="small-note">Min 14 Days, Max 365 Days</div>
-                
+                <div style="text-align: right; font-weight: bold; color: #e84142; margin-top: 5px;">
+                    <span id="dayDisplay">14</span> Days
+                </div>
             </div>
             <button class="btn-calc" type="button" onclick="calculate()">Calculate</button>
         </div>
 
         <!--Result-->
         <div class="result-card">
-            <div>Estimated Rewards</div>
-            <label id="estimatedReward">0.00</label>
+            <div class="est-reward">
+                <span class="result-label">Estimated Reward </span>
+                <span class="result-val"><span id="estimatedReward">0.00</span> AVAX</span>
+            </div>
+            <div class="est-reward">
+                <span class="result-label">APY </span>
+                <span class="result-val" style="color: white;"><span id="apyOutput">0.00</span>%</span>
+            </div>
         </div>
-
-        
-        <script src="./script.js"></script>
     </main>
 
+    <script src="./script.js"></script>
 </body>
 </html>
