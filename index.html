@@ -9,7 +9,7 @@
 <body>
     <!---main-->
     <main class="container">
-        <h1>Avax Apr Calculations</h1>
+        <h1>Avax Reward Calculations</h1>
         
         <!-- Fetching Data -->
         <div id="loading">
@@ -19,13 +19,13 @@
 
         <!--Role-->
         <div class="role-select">
-            <button class="roleBtn active" onclick="setRole('delegator')">Delegator</button>
-            <button class="roleBtn" onclick="setRole('validator')">Validator</button>
+            <button class="roleBtn active" onclick="setRole('delegator')">I'm Delegator</button>
+            <button class="roleBtn" onclick="setRole('validator')">I'm Validator</button>
         </div>
 
         <!--Inputs-->
         <div class="stake-card">
-            <!-- <h2>Stake Amount (AVAX)</h2> -->
+
             <div class="form-group">
                 <label>Stake Amount</label>
                 <input type="number" id="myStake" min="25" value="25">
@@ -39,15 +39,33 @@
             </div>
 
             <div class="form-group">
-                <label>Duration (Days)</label>
-                <input type="number" id="myDays" min="14" max="365" value="14" oninput="updateDayLabel()">
-                <div class="small-note">Min 14 Days, Max 365 Days</div>
-                <div style="text-align: right; font-weight: bold; color: #e84142; margin-top: 5px;">
-                    <span id="dayDisplay">14</span> Days
+                <label>Staking Period</label>
+
+                <!-- Date Picker -->
+                <div class="date-grid">
+                    <div>
+                        <span class="small-note" style="display: block; margin-bottom: 4px;">Start Date</span>
+                        <input type="datetime-local" id="startDate" onchange="syncFromDates()">
+                    </div>
+                    <div>
+                        <span class="small-note" style="display: block; margin-bottom: 4px;">End Date</span>
+                        <input type="datetime-local" id="endDate" onchange="syncFromDates()">
+                    </div>
                 </div>
+                <label style="margin-top: 15px;">Duration (Days)</label>
+                <input type="number" id="myDays" min="14" max="365" value="14" oninput="syncFromNumber()">
+                <div class="small-note">Min 14 Days, Max 365 Days</div>
             </div>
+
+            <!-- Warning Box -->
+            <div id="warningBox">
+                ⚠️ Staking duration is minimum 14, maxium 365 days.
+            </div>
+
             <button class="btn-calc" type="button" onclick="calculate()">Calculate</button>
         </div>
+
+        
 
         <!--Result-->
         <div class="result-card">
@@ -56,10 +74,37 @@
                 <span class="result-val"><span id="estimatedReward">0.00</span> AVAX</span>
             </div>
             <div class="est-reward">
-                <span class="result-label">APY </span>
+                <span class="result-label">Apr(Simple) </span>
+                <span class="result-val" style="color: white;"><span id="aprOutput">0.00</span>%</span>
+            </div>
+            <div class="est-reward">
+                <span class="result-label">APY(Compound) </span>
                 <span class="result-val" style="color: white;"><span id="apyOutput">0.00</span>%</span>
             </div>
+
+            <!-- Daily- Yearly Reward (Based on Apy) -->
+            <div class="projection-title">Projected Earnings (With Compounding)</div>
+            <div class="projection-grid">
+                <div class="proj-card">
+                    <div class="proj-label">Daily</div>
+                    <div class="proj-val"><span id="projDaily">0.00</span> AVAX</div>
+                </div>
+                <div class="proj-card">
+                    <div class="proj-label">Weekly</div>
+                    <div class="proj-val"><span id="projWeekly">0.00</span> AVAX</div>
+                </div>
+                <div class="proj-card">
+                    <div class="proj-label">Monthly</div>
+                    <div class="proj-val"><span id="projMonthly">0.00</span> AVAX</div>
+                </div>
+                <div class="proj-card">
+                    <div class="proj-label">Yearly</div>
+                    <div class="proj-val"><span id="projYearly">0.00</span> AVAX</div>
+                </div>
+            </div>
+            
         </div>
+        
     </main>
 
     <script src="./script.js"></script>

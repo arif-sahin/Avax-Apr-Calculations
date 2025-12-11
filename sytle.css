@@ -5,23 +5,24 @@ body {
     display: flex;
 }
 
-h1 {
-    text-align: center;
-    color: #e84142;
-    margin-top: 0px;
-}
-
-
 .container {
     background-color: white;
     width: 100%;
-    max-width: 550px;
+    max-width: 600px;
     padding: 30px;
-    border: 2px solid #e0e0e0;
+    border: 1px solid #e0e0e0;
     border-radius: 15px;
     justify-self: center;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
 }
+
+h1 {
+    text-align: center;
+    color: #e84142;
+    margin-top: 0px;
+    font-size: 1.5rem;
+}
+
 
 #loading {
     display: flex;
@@ -71,33 +72,49 @@ h1 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.container h2 {
-    margin-top: 0%;
-}
-
 .form-group {
     margin-bottom: 15px;
-    padding: 10px;
+    /* padding: 10px;
     background-color: #fff9f9;
     border: 1px solid #ffecec;
-    border-radius: 8px;
+    border-radius: 8px; */
 
 }
 
 input {
     width: 100%;
     padding: 10px;
-    font-size: 16px;
+    font-size: 1.1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    cursor: pointer;
+}
+
+input:focus {
+    outline: none;
+    border-color: #e84142;
+    box-shadow: 0 0 0 3px rgba(232, 65, 66,0.1);
 }
 
 label {
-    font-weight: bold;
+    font-weight: 600;
     display: block;
     margin-bottom: 8px;
     color: #333;
+    font-size: 1rem;
+}
+
+/* date - grid */
+.date-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
 }
 
 #feeSection {
@@ -109,6 +126,19 @@ label {
     pointer-events: none;
 }
 
+#warningBox {
+    background-color: #fee2e2;
+    color: #991b1b;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    display: none;
+    align-items: center;
+    gap: 10px;
+}
+
+
 .btn-calc {
     color: white;
     background-color: #e84142;
@@ -119,6 +149,15 @@ label {
     margin-top: 10px;
     font-size: 18px;
     font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    
+}
+
+.btn-calc:hover {
+    background-color: #d63031; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+    transform: scale(1.05); 
 }
 
 .result-card {
@@ -147,7 +186,7 @@ label {
 
 .result-val { 
     font-family: monospace; 
-    font-size: 20px; 
+    font-size: 1.2rem; 
     font-weight: bold; 
     color: #e84142; 
 }
@@ -156,8 +195,43 @@ label {
     font-size: 15px; 
 } 
 
+
+.projection-title {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.projection-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.proj-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.proj-label { 
+    font-size: 0.8rem; 
+    color: #9ca3af; 
+    margin-bottom: 4px; 
+}
+.proj-val { 
+    font-family: monospace; 
+    font-weight: bold; 
+    color: white; 
+    font-size: 1rem; 
+}
+
 .small-note {
-    font-size: 12px;
+    font-size: 0.8rem;
     color: #666;
     margin-top: 5px;
 }
