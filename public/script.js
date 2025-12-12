@@ -17,7 +17,7 @@ const Params = {
 let currentTotalSupply = 4656813442939137/10000000;
 let currentRole = 'delegator'; // default role
 
-window.onload = function() {
+window.onload = async function() {
     const now = new Date();
     const minStakeDur = new Date(now.getTime() + (Params.MIN_DURATION_SECONDS * 1000)); // javascript use miliseconds
 
@@ -25,6 +25,7 @@ window.onload = function() {
     document.getElementById('endDate').value = localTime(minStakeDur);
 
     setRole('delegator');
+    await init();
 };
 
 function localTime(date) {
@@ -126,6 +127,11 @@ async function fetchSupply() {
     }
 }
 
+async function init() {
+    const supply = await fetchSupply();
+    console.log('Current Supply: ', supply);
+}
+
 function setRole(role) {
     currentRole = role;
 
@@ -148,7 +154,7 @@ function setRole(role) {
             return;
         }
 
-        feeSection.classList.add('disabled-section')
+        fee.classList.add('disabled-section')
     } else {
         minText.innerText = "Minimium 25 AVAX required(Delegator)";
         stake.value = 25;
