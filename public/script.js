@@ -14,7 +14,7 @@ const Params = {
     VALIDATOR_MIN_STAKE: 2000,
     API_URL: "/api/supply",
 };
-let currentTotalSupply = NaN;
+let currentTotalSupply = 4656813442939137/10000000;
 let currentRole = 'delegator'; // default role
 
 window.onload = function() {
@@ -24,7 +24,6 @@ window.onload = function() {
     document.getElementById('startDate').value = localTime(now);
     document.getElementById('endDate').value = localTime(minStakeDur);
 
-    init();
     setRole('delegator');
 };
 
@@ -121,18 +120,11 @@ async function fetchSupply() {
 
         // return 4656813442939137/10000000;
     } catch (error) {
+        console.error(error);
         document.getElementById('loadingText').innerText = "API Error. Using Default Supply.";
         setTimeout(() => {loading.style.display = 'none'}, 2000);
-        return 4656813442939137/10000000;
     }
 }
-
-async function init() {
-    const supply = await fetchSupply();
-    currentTotalSupply = supply;
-    console.log("Current supply:", supply);
-}
-
 
 function setRole(role) {
     currentRole = role;
