@@ -10,7 +10,11 @@ app.get('/api/supply', async (c) => {
     try {
         const response = await fetch(SNOWPEER_URL, {
             method: 'GET',
-            headers: { 'accept': 'application/json' }
+            headers: { 
+                'accept': 'application/json', 
+                'x-org': 'SNWPR_ARIF',
+                'x-user': 'arif_snwpr_pel23.1??d',
+            }
         })
 
         if (!response.ok) {
@@ -19,7 +23,7 @@ app.get('/api/supply', async (c) => {
         const data = await response.json()
 
         return c.json({
-            supply: data
+            supply: data.supply || data
         }) 
     } catch (error) {
         console.error("Fetch Error", error)
