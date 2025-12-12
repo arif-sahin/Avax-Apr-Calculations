@@ -12,7 +12,7 @@ const Params = {
     VALIDATOR_FEE: 0.02,
     DELEGATOR_MIN_STAKE: 25,
     VALIDATOR_MIN_STAKE: 2000,
-    API_URL: "https://corsproxy.io/?" + encodeURIComponent("https://api.snowpeer.io/v1/monetary/current-total-supply?network=mainnet"),
+    API_URL: "/api/supply",
 };
 let currentTotalSupply = NaN;
 let currentRole = 'delegator'; // default role
@@ -100,29 +100,26 @@ function getEffectiveConrate(durationInSeconds) {
     return (Params.MinConsumptionRate * (1 - ratio) + (Params.MaxConsumptionRate * ratio));
 }
 
-async function fetchSupply() { // Problem on Api
+async function fetchSupply() { 
     const loading = document.getElementById('loading');
     
     try {
-        const currentSupply = await fetch(Params.API_URL, {
-            method: "GET",
-            headers: {
-                "accept": "application/json"
-            }
-        });
+        const currentSupply = await fetch(Params.API_URL);
+
+        if (!currentSupply.ok) throw new Error('Backend error');
 
         const data = await currentSupply.json();
 
-        if(data.result && data.result.supply) {
+        if(data.supply) {
             // converting nAvax to Avax
-            const supply = data.result.supply / 1e9;
-            Params.currentTotalSupply = supply;
+            const supply = data.supply / 1e9;
+            currentTotalSupply = supply;
             loading.style.display = 'none';
-            return supply;
+            // return supply;
             // calculate()
         }
 
-        return 4656813442939137/10000000;
+        // return 4656813442939137/10000000;
     } catch (error) {
         document.getElementById('loadingText').innerText = "API Error. Using Default Supply.";
         setTimeout(() => {loading.style.display = 'none'}, 2000);

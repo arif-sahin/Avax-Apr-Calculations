@@ -1,0 +1,14 @@
+{
+  "name": "avax-apr-calculations",
+  "type": "module",
+  "scripts": {
+    "dev": "node api/index.js",
+    "deploy": "vercel deploy"
+  },
+  "dependencies": {
+    "hono": "^4.0.0"
+  },
+  "devDependencies": {
+    "@hono/node-server": "^1.0.0" 
+  }
+}
