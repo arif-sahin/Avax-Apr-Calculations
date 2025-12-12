@@ -29,7 +29,7 @@ window.onload = function() {
 };
 
 function localTime(date) {
-    const offset = date.getTimezoneOffset() * 6000;
+    const offset = date.getTimezoneOffset() * 60000;
     return (new Date(date - offset).toISOString().slice(0, 16));
 }
 

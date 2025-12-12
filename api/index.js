@@ -3,7 +3,7 @@ import { handle } from 'hono/vercel'
 
 const app = new Hono()
 
-app.get('api/supply', async (c) => {
+app.get('/api/supply', async (c) => {
     //Fetch from Snowpeer
     const SNOWPEER_URL = 'https://api.snowpeer.io/v1/monetary/current-total-supply?network=mainnet'
     
