@@ -12,7 +12,7 @@ const Params = {
     VALIDATOR_FEE: 0.02,
     DELEGATOR_MIN_STAKE: 25,
     VALIDATOR_MIN_STAKE: 2000,
-    API_URL: "/api/supply",
+    API_URL: '/api/supply',
 };
 let currentTotalSupply = 4656813442939137/10000000;
 let currentRole = 'delegator'; // default role

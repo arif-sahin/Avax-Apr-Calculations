@@ -16,8 +16,6 @@ app.get('/supply', async (c) => {
             method: 'GET',
             headers: { 
                 'accept': 'application/json', 
-                'x-org': 'SNWPR_ARIF',
-                'x-user': 'arif_snwpr_pel23.1??d',
             }
         })
 
