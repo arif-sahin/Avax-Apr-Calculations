@@ -27,9 +27,15 @@ app.get('*', async (c) => {
         }
         const data = await response.json()
 
-        return c.json({
-            supply: data.supply / 1e9
-        }) 
+        if (!data.currentSupply) {
+            throw new Error('currentSupply not found in response')
+        }
+
+        const supply =
+        Number(BigInt(data.currentSupply) / 1e9)
+
+        return c.json({ supply }) 
+
     } catch (error) {
         console.error("Fetch Error", error)
         return c.json({error: "Failed to fetch supply"}, 500)
