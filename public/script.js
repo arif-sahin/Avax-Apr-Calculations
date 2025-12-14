@@ -114,8 +114,8 @@ async function fetchSupply() {
             throw new Error('Invalid Supply type')
         }
 
-        currentTotalSupply = supply;
-        return supply;
+        currentTotalSupply = data.supply;
+        return data.supply;
     } catch (error) {
         console.error('Supply fetch failed', error);
         document.getElementById('loadingText').innerText = "API Error. Using Default Supply.";
