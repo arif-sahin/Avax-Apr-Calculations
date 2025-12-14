@@ -28,7 +28,7 @@ app.get('/supply', async (c) => {
         const data = await response.json()
 
         return c.json({
-            supply: data.supply || data
+            supply: data.supply / 1e9
         }) 
     } catch (error) {
         console.error("Fetch Error", error)

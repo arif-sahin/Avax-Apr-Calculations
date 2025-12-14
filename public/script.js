@@ -106,25 +106,23 @@ async function fetchSupply() {
     try {
         const currentSupply = await fetch(Params.API_URL);
 
-        if (!currentSupply.ok) throw new Error('Backend error');
+        if (!currentSupply.ok) throw new Error(`Api error ${currentSupply.status}`);
 
         const data = await currentSupply.json();
 
-        if(data.supply) {
-            // converting nAvax to Avax
-            const supply = data.supply / 1e9;
-            currentTotalSupply = supply;
-            loading.style.display = 'none';
-            return supply;
-            // calculate()
+        if(typeof data.supply !== 'number'){
+            throw new Error('Invalid Supply type')
         }
 
-        // return 4656813442939137/10000000;
+        currentTotalSupply = supply;
+        return supply;
     } catch (error) {
-        console.error(error);
+        console.error('Supply fetch failed', error);
         document.getElementById('loadingText').innerText = "API Error. Using Default Supply.";
         setTimeout(() => {loading.style.display = 'none'}, 2000);
         return currentTotalSupply;
+    } finally {
+        loading.style.display = 'none';
     }
 }
 
