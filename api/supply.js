@@ -32,7 +32,7 @@ app.get('*', async (c) => {
         }
 
         const supply =
-        Number(BigInt(data.currentSupply) / 1e9)
+        Number(BigInt(data.currentSupply) / 1_000_000_000n)
 
         return c.json({ supply }) 
 
