@@ -7,8 +7,6 @@ export const config = {
 
 const app = new Hono()
 
-app.basePath('/api')
-
 app.get('/supply', async (c) => {
     console.log('Supply endpoint hit')
     //Fetch from Snowpeer
