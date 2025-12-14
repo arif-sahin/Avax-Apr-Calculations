@@ -8,6 +8,7 @@ export const config = {
 const app = new Hono()
 
 app.get('/supply', async (c) => {
+    console.log('Supply endpoint hit')
     //Fetch from Snowpeer
     const SNOWPEER_URL = 'https://api.snowpeer.io/v1/monetary/current-total-supply?network=mainnet'
     
@@ -15,7 +16,9 @@ app.get('/supply', async (c) => {
         const response = await fetch(SNOWPEER_URL, {
             method: 'GET',
             headers: { 
-                'accept': 'application/json', 
+                'accept': 'application/json',
+                'x-org': c.env.SNOWPEER_API_USERNAME,
+                'x-user': c.env.SNOWPEER_API_PASSWORD,
             }
         })
 
