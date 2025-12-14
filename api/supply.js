@@ -17,8 +17,8 @@ app.get('*', async (c) => {
             method: 'GET',
             headers: { 
                 'accept': 'application/json',
-                'x-org': c.env.SNOWPEER_API_USERNAME,
-                'x-user': c.env.SNOWPEER_API_PASSWORD,
+                'x-org': process.env.SNOWPEER_API_USERNAME,
+                'x-user': process.env.SNOWPEER_API_PASSWORD,
             }
         })
 
