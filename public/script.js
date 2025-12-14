@@ -115,7 +115,7 @@ async function fetchSupply() {
             const supply = data.supply / 1e9;
             currentTotalSupply = supply;
             loading.style.display = 'none';
-            // return supply;
+            return supply;
             // calculate()
         }
 
@@ -124,6 +124,7 @@ async function fetchSupply() {
         console.error(error);
         document.getElementById('loadingText').innerText = "API Error. Using Default Supply.";
         setTimeout(() => {loading.style.display = 'none'}, 2000);
+        return currentTotalSupply;
     }
 }
 

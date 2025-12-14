@@ -2,7 +2,7 @@
   "name": "avax-apr-calculations",
   "type": "module",
   "scripts": {
-    "dev": "node api/index.js",
+    "dev": "vercel dev",
     "deploy": "vercel deploy"
   },
   "dependencies": {
