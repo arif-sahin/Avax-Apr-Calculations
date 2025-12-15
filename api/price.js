@@ -1,6 +1,9 @@
 import {Hono} from 'hono'
-import { parse } from 'hono/utils/cookie'
 import { handle } from 'hono/vercel'
+
+export const config = {
+  runtime: 'edge',
+}
 
 const app = new Hono()
 
@@ -26,7 +29,7 @@ app.get('*', async (c) => {
             throw new Error('Price not found in response')
         }
         return c.json({price: parseFloat(data.price)})
-        
+
     } catch (error) {
         console.error('Fetch Price Error', error)
         return c.json({error: 'Failed to fetch price'}, 500)
