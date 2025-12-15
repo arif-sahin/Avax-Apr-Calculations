@@ -236,7 +236,14 @@ function calculate() {
     const projectedYearly = getStakeAmount() * (apy / 100);
 
     document.getElementById('projDaily').innerText = (projectedYearly / 365).toFixed(4);
+    document.getElementById('usdDaily').innerText = ((projectedYearly / 365) * avaxPrice).toFixed(2);  
+
     document.getElementById('projWeekly').innerText = (projectedYearly / 52).toFixed(4);
+    document.getElementById('usdWeekly').innerText = ((projectedYearly / 52) * avaxPrice).toFixed(2);  
+
     document.getElementById('projMonthly').innerText = (projectedYearly / 12).toFixed(4);
+    document.getElementById('usdMonthly').innerText = ((projectedYearly / 12) * avaxPrice).toFixed(2);  
+
     document.getElementById('projYearly').innerText = projectedYearly.toFixed(4);
+    document.getElementById('usdYearly').innerText = (projectedYearly  * avaxPrice).toFixed(2);  
 }
