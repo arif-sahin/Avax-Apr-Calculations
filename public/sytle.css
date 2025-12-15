@@ -171,6 +171,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     transform: scale(1.05); 
 }
 
+/* Results */
 .result-card {
     margin-top: 25px;
     text-align: center;
@@ -183,7 +184,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 .est-reward {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start; 
     margin-bottom: 15px;
     padding-bottom: 15px;
     border-bottom: 1px solid #374151;
@@ -200,11 +201,20 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     font-size: 1.2rem; 
     font-weight: bold; 
     color: #e84142; 
+    text-align: right;
 }
 .result-label { 
     color: #f0f0f0; 
-    font-size: 15px; 
+    font-size: 1rem;
+    margin-top: 6px; 
 } 
+
+.usd-subtext {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin-top: 4px;
+    font-weight: normal;
+}
 
 
 .projection-title {

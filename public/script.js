@@ -13,8 +13,10 @@ const Params = {
     DELEGATOR_MIN_STAKE: 25,
     VALIDATOR_MIN_STAKE: 2000,
     API_URL: '/api/supply',
+    PRICE_URL: '/api/price',
 };
 let currentTotalSupply = 4656813442939137/10000000;
+let avaxPrice = 0;
 let currentRole = 'delegator'; // default role
 
 window.onload = async function() {
@@ -126,9 +128,25 @@ async function fetchSupply() {
     }
 }
 
+async function fetchPrice() {
+    try {
+        const price = await fetch(Params.PRICE_URL);
+        if(!price.ok) throw new Error(`Api Error ${price.status}`);
+
+        const data = await price.json();
+        avaxPrice = data.price;
+        return data.price;
+    } catch (error) {
+        console.error('Price fetch failed', error);
+        avaxPrice = 0;
+    }
+}
+
 async function init() {
     const supply = await fetchSupply();
+    const price = await fetchPrice();
     console.log('Current Supply: ', supply);
+    console.log('Current Avax Price($): ', price);
 }
 
 function setRole(role) {
@@ -209,6 +227,10 @@ function calculate() {
     document.getElementById('estimatedReward').innerText = reward.toFixed(6);
     document.getElementById('aprOutput').textContent = apr.toFixed(2);
     document.getElementById('apyOutput').textContent = apy.toFixed(2);
+
+    // USD 
+    const usdValue = reward * avaxPrice;
+    document.getElementById('usdOutput').textContent = usdValue.toFixed(2);
 
     // Projections
     const projectedYearly = getStakeAmount() * (apy / 100);
