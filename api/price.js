@@ -1,4 +1,5 @@
 import {Hono} from 'hono'
+import { parse } from 'hono/utils/cookie'
 import { handle } from 'hono/vercel'
 
 const app = new Hono()
@@ -22,10 +23,10 @@ app.get('*', async (c) => {
         const data = await response.json()
 
         if (!data.price) {
-            throw new Error('currentSupply not found in response')
+            throw new Error('Price not found in response')
         }
-        const price = data.price
-        return c.json({price})
+        return c.json({price: parseFloat(data.price)})
+        
     } catch (error) {
         console.error('Fetch Price Error', error)
         return c.json({error: 'Failed to fetch price'}, 500)
