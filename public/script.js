@@ -35,6 +35,12 @@ function localTime(date) {
     return (new Date(date - offset).toISOString().slice(0, 16));
 }
 
+// Preset
+function setPresetDays(days){
+    document.getElementById('myDays').value = days;
+    syncFromNumber();
+}
+
 // Sync 
 function syncFromNumber() {
     const days = parseFloat(document.getElementById('myDays').value);
@@ -166,20 +172,13 @@ function setRole(role) {
     if(role === 'validator') {
         minText.innerText = "Minimum 2,000 AVAX required(Validator)";
         stake.value = 2000;
-        if(getStakeAmount() < Params.VALIDATOR_MIN_STAKE) {
-            alert('Stake amount must be at least 2000 AVAX');
-            return;
-        }
 
-        fee.classList.add('disabled-section')
+        fee.classList.add('hidden')
     } else {
         minText.innerText = "Minimium 25 AVAX required(Delegator)";
         stake.value = 25;
-        if(getStakeAmount() < Params.DELEGATOR_MIN_STAKE) {
-            alert("Stake amount must be at least 25 AVAX");
-            return; // stop the function
-        } 
-        fee.classList.remove('disabled-section');
+
+        fee.classList.remove('hidden');
     }
 
     //calculate();
@@ -192,16 +191,37 @@ function calculate() {
     // Share Calculation
     const myShare = getStakeAmount() / currentTotalSupply;
     
+    
     // Duration in Seconds 
     const start = new Date(document.getElementById('startDate').value);
     const end = new Date(document.getElementById('endDate').value);
     let durationSeconds = (end - start) / 1000;
 
-    if (durationSeconds < Params.MIN_DURATION_SECONDS) {
-        document.getElementById('estimatedReward').innerText = "---";
-        document.getElementById('apyOutput').innerText = "---";
-        document.getElementById('aprOutput').innerText = "---";
+    // Minimum stake based on role
+    const minStake = currentRole === 'validator' ? Params.VALIDATOR_MIN_STAKE : Params.DELEGATOR_MIN_STAKE;
+    const warningBox = document.getElementById('warningBox')
+    let msg = "";
+
+    if (durationSeconds < Params.MIN_DURATION_SECONDS || durationSeconds > Params.MAX_DURATION_SECONDS) {
+        // document.getElementById('estimatedReward').innerText = "---";
+        // document.getElementById('apyOutput').innerText = "---";
+        // document.getElementById('aprOutput').innerText = "---";
+        msg = "⚠️ Staking duration is minimum 14, maxium 365 days."
+    } else if (getStakeAmount() < minStake) {
+        msg =`⚠️ Minimum stake is ${minStake} AVAX for ${currentRole}s.`;
+    }
+
+    if (msg) {
+        warningBox.innerText = msg;
+        warningBox.style.display = 'flex';
+
+        ['estimatedReward','aprOutput','apyOutput','projDaily','projWeekly','projMonthly','projYearly'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.innerText = "---";
+        });
         return;
+    } else {
+        warningBox.style.display = 'none';
     }
 
     //Rate Calculation, Longer duration = Higher rate

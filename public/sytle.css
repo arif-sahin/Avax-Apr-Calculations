@@ -1,28 +1,107 @@
 body {
     background-color: #f4f4f4;
     justify-content: center;
-    padding: 40px 20px;
     display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
 }
 
-.container {
-    background-color: white;
-    width: 100%;
-    max-width: 600px;
-    padding: 30px;
-    border: 1px solid #e0e0e0;
-    border-radius: 15px;
-    justify-self: center;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+.tooltip-wrap {
+    display: inline-flex;
+    position: relative;
+    margin-left: 8px;
+    vertical-align: middle;
+    cursor: help;
+    z-index: 50;
 }
 
-h1 {
+/* The 'i' Circle Icon */
+.tooltip-icon {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #94a3b8;
+    color: #94a3b8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: serif;
+    font-style: italic;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+
+.tooltip-wrap:hover .tooltip-icon {
+    border-color: #4ade80;
+    color: #4ade80;
+}
+
+/* The Popup Box */
+.tooltip-box {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    background: #0f172a;
+    border: 1px solid #475569;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: #e2e8f0;
     text-align: center;
-    color: #e84142;
-    margin-top: 0px;
-    font-size: 1.5rem;
+    line-height: 1.4;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    transition: opacity 0.2s, visibility 0.2s;
+    pointer-events: none; /* Prevent clicking inside unless needed */
+    font-weight: normal;
 }
 
+/* Position: Above by default (for APR/APY) */
+.tooltip-box.top {
+    bottom: 150%;
+}
+/* Arrow for Top Tooltip */
+.tooltip-box.top::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #475569 transparent transparent transparent;
+}
+
+/* Position: Below (for Header) */
+.tooltip-box.bottom {
+    top: 150%;
+    width: 260px;
+}
+/* Arrow for Bottom Tooltip */
+.tooltip-box.bottom::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #475569 transparent;
+}
+
+/* Hover Interaction */
+.tooltip-wrap:hover .tooltip-box,
+.tooltip-wrap:focus-within .tooltip-box {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto; /* Allow clicking links inside */
+}
+
+.tooltip-box a { color: #4ade80; text-decoration: none; }
+.tooltip-box a:hover { text-decoration: underline; }
 
 #loading {
     position: fixed;
@@ -57,6 +136,52 @@ h1 {
     text-transform: uppercase;
 }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+.header {
+    background-color: #1e293b;
+    border-bottom: 1px solid #475569;
+    padding: 1rem 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+.header-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header h1 {
+    text-align: center;
+    color: #e84142;
+    margin-top: 0px;
+    font-size: 1.5rem;
+    display: flex;
+    gap: 10px;
+}
+
+/* Main content */
+
+.main-content {
+    flex: 1; 
+    display: flex;
+    justify-content: center;
+    padding: 30px 20px;
+    align-items: flex-start;
+}
+
+.container {
+    background-color: white;
+    width: 100%;
+    max-width: 600px;
+    padding: 30px;
+    border: 1px solid #e0e0e0;
+    border-radius: 15px;
+    justify-self: center;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+}
 
 .role-select {
     display: flex;
@@ -122,6 +247,32 @@ label {
     grid-template-columns: 1fr 1fr;
     gap: 15px;
     margin-bottom: 15px;
+}
+
+/* Preset */
+.preset-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.preset-btn {
+    background: #334155;
+    border: 1px solid #475569;
+    color: #94a3b8;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    flex: 1;
+    transition: all 0.2s;
+    font-weight: 600;
+}
+
+.preset-btn:hover {
+    background-color: #1e293b;
+    color: #f8fafc;
+    border-color: #94a3b8;
 }
 
 input[type="datetime-local"]::-webkit-calendar-picker-indicator {
@@ -260,3 +411,15 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 #estimatedReward {
     color: white;
 }
+
+/* footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #475569;
+    color: #94a3b8;
+    font-size: 1rem;
+    background-color: #1e293b;
+}
+
+.hidden { display: none !important; }

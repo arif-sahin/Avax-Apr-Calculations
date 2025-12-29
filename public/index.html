@@ -3,21 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avax Apr</title>
+    <title>Avacabus</title>
     <link rel="stylesheet" href="./sytle.css">
 </head>
 <body>
-    <!---main-->
-    <main class="container">
-        <h1>Avax Reward Calculations</h1>
-        
-        <!-- Fetching Data -->
-        <div id="loading">
-            <div class="spinner"></div>
-            <div id="loadingText">Connecting Snowpeer, Fetching Data...</div>
+    
+    <!-- Fetching Data -->
+    <div id="loading">
+        <div class="spinner"></div>
+        <div id="loadingText">Connecting Snowpeer, Fetching Data...</div>
+    </div> 
+    <header class="header">
+        <div class="header-content"> 
+            <h1>Avacabus
+                <div class="tooltip-wrap" tabindex="0">
+                <div class="tooltip-icon">i</div>
+                <div class="tooltip-box bottom">
+                    Calculations use the official <a href="https://build.avax.network/docs/primary-network/validate/rewards-formula" target="_blank">Avalanche Protocol Formula</a>.
+                    <br><br>
+                    Data is fetched live from the <a href="https://snowpeer.io/">Snowpeer</a>
+                </div>
+                </div>
+            </h1>
         </div>
-
-        <!--Role-->
+    </header>
+    <!---main-->
+    <main class="main-content">
+        <div class="container">
+            <!--Role-->
         <div class="role-select">
             <button class="roleBtn active" onclick="setRole('delegator')">I'm Delegator</button>
             <button class="roleBtn" onclick="setRole('validator')">I'm Validator</button>
@@ -52,9 +65,18 @@
                         <input type="datetime-local" id="endDate" onchange="syncFromDates()">
                     </div>
                 </div>
+
                 <label style="margin-top: 15px;">Duration (Days)</label>
                 <input type="number" id="myDays" min="14" max="365" value="14" oninput="syncFromNumber()">
                 <div class="small-note">Min 14 Days, Max 365 Days</div>
+
+                <!-- Preset Buttons -->
+                 <div class="preset-buttons">
+                    <button class="preset-btn" onclick="setPresetDays(14)">14d (Min)</button>
+                    <button class="preset-btn" onclick="setPresetDays(30)">30d</button>
+                    <button class="preset-btn" onclick="setPresetDays(180)">6M</button>
+                    <button class="preset-btn" onclick="setPresetDays(365)">1y (Max)</button>                    
+                </div>
             </div>
 
             <!-- Warning Box -->
@@ -76,11 +98,29 @@
                 <div id="usdOutput" class="usd-subtext">≈ 0.00 <span>$</span></div>
             </div>
             <div class="est-reward">
-                <span class="result-label">Apr(Simple) </span>
+                <span class="result-label">
+                    Apr(Simple) 
+                    <div class="tooltip-wrap" tabindex="0">
+                        <div class="tooltip-icon">i</div>
+                        <div class="tooltip-box top">
+                            <strong>Simple Interest</strong><br>
+                            The annualized rate if you do <em>not</em> restake your rewards.
+                        </div>
+                    </div>
+                </span>
                 <span class="result-val" style="color: white;"><span id="aprOutput">0.00</span>%</span>
             </div>
             <div class="est-reward">
-                <span class="result-label">APY(Compound) </span>
+                <span class="result-label">
+                    APY(Compound) 
+                    <div class="tooltip-wrap" tabindex="0">
+                        <div class="tooltip-icon">i</div>
+                        <div class="tooltip-box top">
+                            <strong>Compound Interest</strong><br>
+                            The annualized rate if you restake your rewards at the end of every period.
+                        </div>
+                    </div>
+                </span>
                 <span class="result-val" style="color: white;"><span id="apyOutput">0.00</span>%</span>
             </div>
 
@@ -111,7 +151,14 @@
             
         </div>
         
+        </div>
+        
     </main>
+
+    <!-- footer -->
+     <footer class="footer">
+        <p>Built by @ - Powered by Snowpeer</p>
+     </footer>
 
     <script src="./script.js"></script>
 </body>
