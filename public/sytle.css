@@ -1,5 +1,20 @@
+:root {
+    --avax-red: #E84142;
+    --bg: #0f172a;
+    --card-bg: #1e293b;
+    --header-bg: #1e293b;
+    --text: #f8fafc;
+    --text-muted: #94a3b8;
+    --input-bg: #334155;
+    --input-border: #475569;
+    --accent-green: #4ade80;
+    --warning-bg: #451a1a;
+    --warning-text: #fca5a5;
+}
+
 body {
-    background-color: #f4f4f4;
+    background-color: var(--bg);
+    color: var(--text);
     justify-content: center;
     display: flex;
     flex-direction: column;
@@ -20,8 +35,8 @@ body {
 .tooltip-icon {
     width: 16px;
     height: 16px;
-    border: 1px solid #94a3b8;
-    color: #94a3b8;
+    border: 1px solid var(--text-muted);
+    color: var(--text-muted);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -33,8 +48,8 @@ body {
 }
 
 .tooltip-wrap:hover .tooltip-icon {
-    border-color: #4ade80;
-    color: #4ade80;
+    border-color: var(--accent-green);
+    color: var(--accent-green);
 }
 
 /* The Popup Box */
@@ -100,7 +115,7 @@ body {
     pointer-events: auto; /* Allow clicking links inside */
 }
 
-.tooltip-box a { color: #4ade80; text-decoration: none; }
+.tooltip-box a { color: var(--accent-green); text-decoration: none; }
 .tooltip-box a:hover { text-decoration: underline; }
 
 #loading {
@@ -109,7 +124,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #0f172a;
+    background-color: var(--bg);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -121,15 +136,15 @@ body {
 .spinner {
     width: 50px;
     height: 50px;
-    border: 4px solid #334155;
-    border-top: 4px solid #e84142;
+    border: 4px solid var(--input-bg);
+    border-top: 4px solid var(--avax-red);
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin-bottom: 20px;
 }
 
 #loadingText {
-    color: #94a3b8;
+    color: var(--text-muted);
     font-size: 1rem;
     letter-spacing: 0.1rem;
     font-weight: 600;
@@ -138,8 +153,8 @@ body {
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
 .header {
-    background-color: #1e293b;
-    border-bottom: 1px solid #475569;
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--input-border);
     padding: 1rem 0;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     z-index: 10;
@@ -155,7 +170,7 @@ body {
 
 .header h1 {
     text-align: center;
-    color: #e84142;
+    color: var(--avax-red);
     margin-top: 0px;
     font-size: 1.5rem;
     display: flex;
@@ -173,7 +188,7 @@ body {
 }
 
 .container {
-    background-color: white;
+    background-color: var(--card-bg);
     width: 100%;
     max-width: 600px;
     padding: 30px;
@@ -185,7 +200,7 @@ body {
 
 .role-select {
     display: flex;
-    background: #f0f0f0;
+    background: var(--input-bg);
     border-radius: 8px;
     padding: 4px;
     margin-bottom: 25px;
@@ -196,32 +211,37 @@ body {
     padding: 10px;
     border: none;
     cursor: pointer;
+    background: transparent;
     border-radius: 6px;
     font-weight: 600;
-    color: #666;
+    color: var(--text-muted);
     transition: all 0.2s;
 }
 
 .roleBtn.active {
-    background: white;
-    color: #e84142;
+    background: var(--card-bg);
+    color: var(--avax-red);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
     margin-bottom: 15px;
-    /* padding: 10px;
-    background-color: #fff9f9;
-    border: 1px solid #ffecec;
-    border-radius: 8px; */
-
+}
+label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-size: 1rem;
 }
 
 input {
     width: 100%;
     padding: 10px;
     font-size: 1.1rem;
-    border: 1px solid #ccc;
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    color: white;
     border-radius: 5px;
     box-sizing: border-box;
     cursor: pointer;
@@ -229,17 +249,17 @@ input {
 
 input:focus {
     outline: none;
-    border-color: #e84142;
-    box-shadow: 0 0 0 3px rgba(232, 65, 66,0.1);
+    border-color: var(--avax-red);
+    box-shadow: 0 0 0 3px rgba(232, 65, 66,0.2);
 }
 
-label {
-    font-weight: 600;
-    display: block;
-    margin-bottom: 8px;
-    color: #333;
-    font-size: 1rem;
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
 }
+input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover { 
+    opacity: 1; 
+}
+
 
 /* date - grid */
 .date-grid {
@@ -257,9 +277,9 @@ label {
 }
 
 .preset-btn {
-    background: #334155;
-    border: 1px solid #475569;
-    color: #94a3b8;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    color: var(--text-muted);
     padding: 8px 12px;
     border-radius: 8px;
     font-size: 0.9rem;
@@ -270,14 +290,11 @@ label {
 }
 
 .preset-btn:hover {
-    background-color: #1e293b;
-    color: #f8fafc;
-    border-color: #94a3b8;
+    background-color: var(--card-bg);
+    color: var(--text);
+    border-color: var(--text-muted);
 }
 
-input[type="datetime-local"]::-webkit-calendar-picker-indicator {
-    cursor: pointer;
-}
 
 #feeSection {
     transition: opacity 0.3s;
@@ -289,8 +306,8 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 }
 
 #warningBox {
-    background-color: #fee2e2;
-    color: #991b1b;
+    background-color: var(--warning-bg);
+    color: var(--warning-text);
     padding: 10px;
     border-radius: 8px;
     font-size: 0.9rem;
@@ -298,12 +315,13 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     display: none;
     align-items: center;
     gap: 10px;
+    border: 1px solid rgba(252, 165, 165, 0.2);
 }
 
 
 .btn-calc {
-    color: white;
-    background-color: #e84142;
+    color: var(--text);
+    background-color: var(--avax-red);
     border: none;
     border-radius: 8px;
     width: 100%;
@@ -317,9 +335,8 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 }
 
 .btn-calc:hover {
-    background-color: #d63031; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
-    transform: scale(1.05); 
+    transform: scale(0.95); 
 }
 
 /* Results */
@@ -327,7 +344,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     margin-top: 25px;
     text-align: center;
     padding: 20px;
-    background-color: #333;
+    background-color: #0f172a;
     color: white;
     border-radius: 10px;
 }
@@ -338,7 +355,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     align-items: flex-start; 
     margin-bottom: 15px;
     padding-bottom: 15px;
-    border-bottom: 1px solid #374151;
+    border-bottom: 1px solid #334155;
 }
 
 .est-reward:last-child {
@@ -351,18 +368,18 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     font-family: monospace; 
     font-size: 1.2rem; 
     font-weight: bold; 
-    color: #e84142; 
+    color: white; 
     text-align: right;
 }
 .result-label { 
-    color: #f0f0f0; 
+    color: var(--text-muted); 
     font-size: 1rem;
     margin-top: 6px; 
 } 
 
 .usd-subtext {
     font-size: 0.9rem;
-    color: #94a3b8;
+    color: var(--text-muted);
     margin-top: 4px;
     font-weight: normal;
 }
@@ -372,9 +389,10 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     margin-top: 20px;
     margin-bottom: 10px;
     font-size: 0.9rem;
-    color: #9ca3af;
+    color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    font-weight: 700;
 }
 
 .projection-grid {
@@ -384,15 +402,16 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 }
 
 .proj-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.03);
     padding: 12px;
     border-radius: 8px;
     text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .proj-label { 
     font-size: 0.8rem; 
-    color: #9ca3af; 
+    color: var(--text-muted); 
     margin-bottom: 4px; 
 }
 .proj-val { 
@@ -404,7 +423,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 
 .small-note {
     font-size: 0.8rem;
-    color: #666;
+    color: var(--text-muted);
     margin-top: 5px;
 }
 
@@ -416,10 +435,10 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 .footer {
     text-align: center;
     padding: 20px;
-    border-top: 1px solid #475569;
-    color: #94a3b8;
+    border-top: 1px solid var(--input-border);
+    color: var(--text-muted);
     font-size: 1rem;
-    background-color: #1e293b;
+    background-color: var(--header-bg);
 }
 
 .hidden { display: none !important; }
